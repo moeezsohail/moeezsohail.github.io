@@ -6,12 +6,6 @@
 - CSS
 - JavaScript
 
-## Table of Contents
-
-- [About](#about)
-- [Implementation](#implementation)
-- [Author Info](#author-info)
-
 ## About
 
 > A personal website that highlights my personal projects and skills that will be updated over time.
