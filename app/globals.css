@@ -31,8 +31,9 @@
   --gradient-border: linear-gradient(135deg, var(--accent-bright), var(--accent-warm-bright));
   --tag-bg: color-mix(in oklab, var(--accent) 14%, var(--surface));
   --tag-text: color-mix(in oklab, var(--accent) 72%, var(--foreground));
-  --tag-bg-warm: color-mix(in oklab, var(--accent-warm) 12%, var(--surface));
-  --tag-text-warm: color-mix(in oklab, var(--accent-warm-bright) 55%, var(--foreground));
+  /* Stronger blue mix so pills read clearly on light surfaces (vs teal pills) */
+  --tag-bg-warm: color-mix(in oklab, var(--accent-warm) 16%, var(--surface));
+  --tag-text-warm: color-mix(in oklab, var(--accent-warm) 78%, var(--foreground));
   --logo-gradient: linear-gradient(
     90deg,
     var(--accent) 0%,
@@ -68,8 +69,9 @@
     --gradient-border: linear-gradient(135deg, var(--accent-bright), var(--accent-warm-bright));
     --tag-bg: color-mix(in oklab, var(--accent) 16%, var(--surface));
     --tag-text: color-mix(in oklab, var(--accent-bright) 35%, white);
-    --tag-bg-warm: color-mix(in oklab, var(--accent-warm) 14%, var(--surface));
-    --tag-text-warm: color-mix(in oklab, var(--accent-warm-bright) 35%, white);
+    /* Was ~14% blue on navy: same as card → invisible pills; bump contrast */
+    --tag-bg-warm: color-mix(in oklab, var(--accent-warm-bright) 34%, var(--surface));
+    --tag-text-warm: color-mix(in oklab, var(--accent-warm-bright) 72%, white);
     --logo-gradient: linear-gradient(90deg, #99f6e4 0%, #5eead4 40%, #93c5fd 100%);
   }
 }
