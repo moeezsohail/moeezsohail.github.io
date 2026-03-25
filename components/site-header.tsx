@@ -3,21 +3,65 @@
 import { useEffect, useState } from "react";
 import { navIds, person } from "@/lib/content";
 
+/**
+ * iOS-friendly scroll lock: avoid documentElement/body overflow:hidden (breaks sticky + can
+ * leave the page non-scrollable). See: fixed body + restore scrollY pattern.
+ */
+function useScrollLock(locked: boolean) {
+  useEffect(() => {
+    if (!locked) return;
+
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const { body } = document;
+
+    body.style.setProperty("position", "fixed");
+    body.style.setProperty("top", `-${scrollY}px`);
+    body.style.setProperty("left", "0");
+    body.style.setProperty("right", "0");
+    body.style.setProperty("width", "100%");
+
+    return () => {
+      body.style.removeProperty("position");
+      body.style.removeProperty("top");
+      body.style.removeProperty("left");
+      body.style.removeProperty("right");
+      body.style.removeProperty("width");
+      // `html { scroll-behavior: smooth }` would make scrollTo() animate unless we force instant.
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: scrollY, left: 0, behavior: "instant" });
+      });
+    };
+  }, [locked]);
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  /** Avoid same tap that opens the menu hitting the dimmer and closing instantly (iOS). */
+  const [backdropArmed, setBackdropArmed] = useState(false);
+  useScrollLock(open);
 
   useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
+    if (!open) {
+      setBackdropArmed(false);
+      return;
+    }
+    const t = window.setTimeout(() => setBackdropArmed(true), 100);
+    return () => window.clearTimeout(t);
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[color-mix(in_oklab,var(--accent)_12%,var(--border))] bg-[color-mix(in_oklab,var(--surface)_85%,transparent)] pt-[env(safe-area-inset-top)] backdrop-blur-md">
-      <div className="mx-auto flex min-h-14 max-w-3xl items-center justify-between gap-3 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:min-h-14 sm:gap-4 sm:pl-6 sm:pr-6">
+    <header className="sticky top-0 z-50 w-full shrink-0 overflow-visible border-b border-[color-mix(in_oklab,var(--accent)_12%,var(--border))] bg-[color-mix(in_oklab,var(--surface)_85%,transparent)] pt-[env(safe-area-inset-top)] backdrop-blur-md">
+      {open && backdropArmed ? (
+        <button
+          type="button"
+          className="fixed inset-0 z-[40] bg-[color-mix(in_oklab,var(--foreground)_12%,transparent)] sm:hidden"
+          aria-hidden
+          tabIndex={-1}
+          onClick={() => setOpen(false)}
+        />
+      ) : null}
+
+      <div className="relative z-50 mx-auto flex min-h-14 max-w-3xl items-center justify-between gap-3 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:min-h-14 sm:gap-4 sm:pl-6 sm:pr-6">
         <a
           href="#top"
           className="logo-link flex min-h-11 min-w-[2.75rem] items-center font-display text-sm font-bold tracking-tight"
@@ -40,11 +84,14 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 sm:hidden">
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-[color-mix(in_oklab,var(--accent)_20%,var(--border))] bg-[var(--elevated)] text-[var(--foreground)] transition-[transform,box-shadow,border-color] duration-200 hover:scale-105 hover:border-[color-mix(in_oklab,var(--accent-bright)_35%,var(--border))] hover:shadow-[0_0_20px_-4px_color-mix(in_oklab,var(--accent-bright)_35%,transparent)] active:scale-100"
+            className="relative z-[60] inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-[color-mix(in_oklab,var(--accent)_20%,var(--border))] bg-[var(--elevated)] text-[var(--foreground)] transition-[transform,box-shadow,border-color] duration-200 hover:scale-105 hover:border-[color-mix(in_oklab,var(--accent-bright)_35%,var(--border))] hover:shadow-[0_0_20px_-4px_color-mix(in_oklab,var(--accent-bright)_35%,transparent)] active:scale-100"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen((v) => !v);
+            }}
           >
             <span className="sr-only">Menu</span>
             {open ? (
@@ -62,10 +109,10 @@ export function SiteHeader() {
       {open ? (
         <div
           id="mobile-nav"
-          className="border-t border-[var(--border)] bg-[var(--surface)] py-2 sm:hidden"
+          className="relative z-50 border-t border-[var(--border)] bg-[var(--surface)] py-2 shadow-[0_12px_24px_-12px_color-mix(in_oklab,var(--foreground)_25%,transparent)] sm:hidden"
         >
           <nav
-            className="flex flex-col gap-0.5 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:px-6"
+            className="flex max-h-[min(70vh,24rem)] flex-col gap-0.5 overflow-y-auto overscroll-contain pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:px-6"
             aria-label="Mobile primary"
           >
             {navIds.map(({ id, label }) => (
