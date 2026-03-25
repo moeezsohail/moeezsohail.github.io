@@ -3,42 +3,22 @@
 import { useEffect, useState } from "react";
 import { navIds, person } from "@/lib/content";
 
-/**
- * iOS-friendly scroll lock: avoid documentElement/body overflow:hidden (breaks sticky + can
- * leave the page non-scrollable). See: fixed body + restore scrollY pattern.
- */
-function useScrollLock(locked: boolean) {
-  useEffect(() => {
-    if (!locked) return;
-
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const { body } = document;
-
-    body.style.setProperty("position", "fixed");
-    body.style.setProperty("top", `-${scrollY}px`);
-    body.style.setProperty("left", "0");
-    body.style.setProperty("right", "0");
-    body.style.setProperty("width", "100%");
-
-    return () => {
-      body.style.removeProperty("position");
-      body.style.removeProperty("top");
-      body.style.removeProperty("left");
-      body.style.removeProperty("right");
-      body.style.removeProperty("width");
-      // `html { scroll-behavior: smooth }` would make scrollTo() animate unless we force instant.
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: scrollY, left: 0, behavior: "instant" });
-      });
-    };
-  }, [locked]);
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const prefersReduced =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({
+    block: "start",
+    behavior: prefersReduced ? "instant" : "smooth",
+  });
 }
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   /** Avoid same tap that opens the menu hitting the dimmer and closing instantly (iOS). */
   const [backdropArmed, setBackdropArmed] = useState(false);
-  useScrollLock(open);
 
   useEffect(() => {
     if (!open) {
@@ -48,6 +28,18 @@ export function SiteHeader() {
     const t = window.setTimeout(() => setBackdropArmed(true), 100);
     return () => window.clearTimeout(t);
   }, [open]);
+
+  const onMobileNavClick = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setOpen(false);
+    window.history.replaceState(null, "", `#${id}`);
+    // After drawer unmounts, sticky height changes — wait for layout then scroll.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToSection(id);
+      });
+    });
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full shrink-0 overflow-visible border-b border-[color-mix(in_oklab,var(--accent)_12%,var(--border))] bg-[color-mix(in_oklab,var(--surface)_85%,transparent)] pt-[env(safe-area-inset-top)] backdrop-blur-md">
@@ -120,7 +112,7 @@ export function SiteHeader() {
                 key={id}
                 href={`#${id}`}
                 className="rounded-lg px-3 py-3.5 text-base text-[var(--foreground)] transition-[transform,background-color] duration-200 active:bg-[color-mix(in_oklab,var(--accent)_10%,var(--elevated))] motion-safe:hover:translate-x-1 motion-safe:hover:bg-[color-mix(in_oklab,var(--accent)_8%,var(--elevated))]"
-                onClick={() => setOpen(false)}
+                onClick={onMobileNavClick(id)}
               >
                 {label}
               </a>

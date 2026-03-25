@@ -116,7 +116,7 @@ export function HomePage() {
           <section
             id={navIds[0].id}
             aria-labelledby="about-heading"
-            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+            className="scroll-mt-[max(7.25rem,calc(env(safe-area-inset-top,0px)+4.5rem))] sm:scroll-mt-28"
           >
             <SectionTitle id="about-heading">About</SectionTitle>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--foreground)]/90">
@@ -129,7 +129,7 @@ export function HomePage() {
           <section
             id={navIds[1].id}
             aria-labelledby="exp-heading"
-            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+            className="scroll-mt-[max(7.25rem,calc(env(safe-area-inset-top,0px)+4.5rem))] sm:scroll-mt-28"
           >
             <SectionTitle id="exp-heading">Experience</SectionTitle>
             <ul className="mt-8 space-y-10">
@@ -168,7 +168,7 @@ export function HomePage() {
           <section
             id={navIds[2].id}
             aria-labelledby="proj-heading"
-            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+            className="scroll-mt-[max(7.25rem,calc(env(safe-area-inset-top,0px)+4.5rem))] sm:scroll-mt-28"
           >
             <SectionTitle id="proj-heading">Projects</SectionTitle>
             <ul className="mt-8 grid gap-5">
@@ -256,7 +256,7 @@ export function HomePage() {
           <section
             id={navIds[3].id}
             aria-labelledby="edu-heading"
-            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+            className="scroll-mt-[max(7.25rem,calc(env(safe-area-inset-top,0px)+4.5rem))] sm:scroll-mt-28"
           >
             <SectionTitle id="edu-heading">Education & skills</SectionTitle>
             <div className="border-gradient-wrap mt-8">
