@@ -1,64 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f2f0;
-  --foreground: #1c1917;
-  --muted: #57534e;
-  --surface: #fffcf9;
-  --elevated: #fff7f0;
-  --border: #e7e0db;
-  /* Teal + warm coral—reads lively in light mode */
-  --accent: #0f766e;
+  --background: #eef2f7;
+  --foreground: #0f172a;
+  --muted: #475569;
+  --surface: #f8fafc;
+  --elevated: #f1f5f9;
+  --border: #cbd5e1;
+  /* Teal + dark blue */
+  --accent: #0d9488;
   --accent-bright: #14b8a6;
-  --accent-warm: #ea580c;
-  --accent-warm-bright: #fb923c;
-  --accent-on-solid: #fafaf9;
+  --accent-warm: #1e3a8a;
+  --accent-warm-bright: #2563eb;
+  --accent-on-solid: #f8fafc;
   --accent-glow: color-mix(in oklab, var(--accent-bright) 45%, transparent);
-  --warm-glow: color-mix(in oklab, var(--accent-warm-bright) 35%, transparent);
-  --hero-mesh-1: color-mix(in oklab, var(--accent-bright) 22%, transparent);
-  --hero-mesh-2: color-mix(in oklab, var(--accent-warm-bright) 18%, transparent);
+  --warm-glow: color-mix(in oklab, var(--accent-warm-bright) 32%, transparent);
+  --hero-mesh-1: color-mix(in oklab, var(--accent-bright) 20%, transparent);
+  --hero-mesh-2: color-mix(in oklab, var(--accent-warm-bright) 16%, transparent);
   --gradient-text: linear-gradient(
     105deg,
     var(--accent) 0%,
-    var(--accent-bright) 38%,
-    var(--accent-warm) 88%
+    var(--accent-bright) 42%,
+    var(--accent-warm-bright) 90%
   );
-  --gradient-cta: linear-gradient(135deg, var(--accent) 0%, color-mix(in oklab, var(--accent-warm) 70%, var(--accent)) 100%);
+  --gradient-cta: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    color-mix(in oklab, var(--accent-warm) 55%, var(--accent)) 100%
+  );
   --gradient-border: linear-gradient(135deg, var(--accent-bright), var(--accent-warm-bright));
   --tag-bg: color-mix(in oklab, var(--accent) 14%, var(--surface));
   --tag-text: color-mix(in oklab, var(--accent) 72%, var(--foreground));
   --tag-bg-warm: color-mix(in oklab, var(--accent-warm) 12%, var(--surface));
-  --tag-text-warm: color-mix(in oklab, var(--accent-warm) 65%, var(--foreground));
-  /* Header mark: tuned for legibility on light surfaces */
+  --tag-text-warm: color-mix(in oklab, var(--accent-warm-bright) 55%, var(--foreground));
   --logo-gradient: linear-gradient(
     90deg,
     var(--accent) 0%,
-    var(--accent-bright) 50%,
-    var(--accent-warm) 100%
+    var(--accent-bright) 45%,
+    var(--accent-warm-bright) 100%
   );
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f0e0d;
-    --foreground: #fafaf9;
-    --muted: #a8a29e;
-    --surface: #1a1816;
-    --elevated: #231f1c;
-    --border: #3f3834;
+    --background: #0a0f18;
+    --foreground: #f1f5f9;
+    --muted: #94a3b8;
+    --surface: #111c2e;
+    --elevated: #172554;
+    --border: #334155;
     --accent: #2dd4bf;
     --accent-bright: #5eead4;
-    --accent-warm: #fb923c;
-    --accent-warm-bright: #fdba74;
-    --accent-on-solid: #0c0a09;
-    --accent-glow: color-mix(in oklab, var(--accent-bright) 28%, transparent);
-    --warm-glow: color-mix(in oklab, var(--accent-warm-bright) 22%, transparent);
-    --hero-mesh-1: color-mix(in oklab, var(--accent-bright) 18%, transparent);
-    --hero-mesh-2: color-mix(in oklab, var(--accent-warm-bright) 14%, transparent);
+    --accent-warm: #3b82f6;
+    --accent-warm-bright: #60a5fa;
+    --accent-on-solid: #0a0f18;
+    --accent-glow: color-mix(in oklab, var(--accent-bright) 26%, transparent);
+    --warm-glow: color-mix(in oklab, var(--accent-warm-bright) 20%, transparent);
+    --hero-mesh-1: color-mix(in oklab, var(--accent-bright) 16%, transparent);
+    --hero-mesh-2: color-mix(in oklab, var(--accent-warm-bright) 12%, transparent);
     --gradient-text: linear-gradient(
       105deg,
       var(--accent-bright) 0%,
-      var(--accent) 42%,
+      var(--accent) 40%,
       var(--accent-warm-bright) 92%
     );
     --gradient-cta: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent-warm) 100%);
@@ -66,9 +69,8 @@
     --tag-bg: color-mix(in oklab, var(--accent) 16%, var(--surface));
     --tag-text: color-mix(in oklab, var(--accent-bright) 35%, white);
     --tag-bg-warm: color-mix(in oklab, var(--accent-warm) 14%, var(--surface));
-    --tag-text-warm: color-mix(in oklab, var(--accent-warm-bright) 40%, white);
-    /* Brighter stops so small header type clears near-black UI chrome */
-    --logo-gradient: linear-gradient(90deg, #b2f5ea 0%, #5eead4 42%, #fcd34d 100%);
+    --tag-text-warm: color-mix(in oklab, var(--accent-warm-bright) 35%, white);
+    --logo-gradient: linear-gradient(90deg, #99f6e4 0%, #5eead4 40%, #93c5fd 100%);
   }
 }
 
@@ -131,7 +133,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* Don't use overflow-x: clip here — it breaks position:sticky for the header on iOS/WebKit */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }

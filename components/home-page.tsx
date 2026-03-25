@@ -8,6 +8,7 @@ import {
   projects,
   skills,
 } from "@/lib/content";
+import Image from "next/image";
 
 function ExternalIcon({ className }: { className?: string }) {
   return (
@@ -50,50 +51,64 @@ export function HomePage() {
       <main id="top" className="min-w-0 flex-1 overflow-x-clip">
         <section className="relative">
           <div className="relative mx-auto max-w-3xl py-16 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:py-28 sm:pl-6 sm:pr-6">
-            <p className="mb-3 text-sm font-semibold tracking-wide text-[var(--accent-warm)]">
-              {person.title}
-            </p>
-            <h1 className="font-display text-[clamp(1.875rem,6.5vw+0.5rem,3.15rem)] font-bold leading-[1.12] tracking-tight sm:text-5xl sm:leading-[1.08]">
-              <span className="text-gradient">{person.name}</span>
-            </h1>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-              {person.tagline}
-            </p>
-            <p className="mt-2 text-sm text-[color-mix(in_oklab,var(--accent)_25%,var(--muted))]">
-              {person.location}
-            </p>
-            <ul className="mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap">
-              <li className="w-full sm:w-auto">
-                <a
-                  href={`mailto:${person.email}`}
-                  className="btn-lift flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-cta px-5 py-2.5 text-sm font-semibold text-[var(--accent-on-solid)] shadow-[0_4px_20px_color-mix(in_oklab,var(--accent)_35%,transparent)] hover:brightness-110 hover:shadow-[0_10px_36px_-6px_color-mix(in_oklab,var(--accent-warm)_35%,transparent)] sm:inline-flex sm:w-auto sm:justify-start"
-                >
-                  Email
-                </a>
-              </li>
-              <li className="w-full sm:w-auto">
-                <a
-                  href={person.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-2 border-[color-mix(in_oklab,var(--accent)_45%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-bright)_30%,transparent)] hover:text-[var(--accent)] sm:inline-flex sm:w-auto sm:justify-start"
-                >
-                  GitHub
-                  <ExternalIcon className="link-icon-shift opacity-70" />
-                </a>
-              </li>
-              <li className="w-full sm:w-auto">
-                <a
-                  href={person.links.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-2 border-[color-mix(in_oklab,var(--accent-warm)_40%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-warm-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-warm-bright)_28%,transparent)] hover:text-[var(--accent-warm)] sm:inline-flex sm:w-auto sm:justify-start"
-                >
-                  LinkedIn
-                  <ExternalIcon className="link-icon-shift opacity-70" />
-                </a>
-              </li>
-            </ul>
+            <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-center sm:gap-10">
+              <div className="relative shrink-0">
+                <Image
+                  src="/profile_pic.jpeg"
+                  alt="Moeez Sohail"
+                  width={176}
+                  height={176}
+                  priority
+                  className="h-36 w-36 rounded-2xl object-cover shadow-[0_12px_40px_-16px_color-mix(in_oklab,var(--foreground)_35%,transparent)] ring-2 ring-[color-mix(in_oklab,var(--accent)_40%,var(--border))] ring-offset-4 ring-offset-[var(--background)] sm:h-44 sm:w-44"
+                />
+              </div>
+              <div className="min-w-0 flex-1 text-center sm:text-left">
+                <p className="mb-3 text-sm font-semibold tracking-wide text-[var(--accent-warm-bright)]">
+                  {person.title}
+                </p>
+                <h1 className="font-display text-[clamp(1.875rem,6.5vw+0.5rem,3.15rem)] font-bold leading-[1.12] tracking-tight sm:text-5xl sm:leading-[1.08]">
+                  <span className="text-gradient">{person.name}</span>
+                </h1>
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                  {person.tagline}
+                </p>
+                <p className="mt-2 text-sm text-[color-mix(in_oklab,var(--accent)_25%,var(--muted))]">
+                  {person.location}
+                </p>
+                <ul className="mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap">
+                  <li className="w-full sm:w-auto">
+                    <a
+                      href={`mailto:${person.email}`}
+                      className="btn-lift flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-cta px-5 py-2.5 text-sm font-semibold text-[var(--accent-on-solid)] shadow-[0_4px_20px_color-mix(in_oklab,var(--accent)_35%,transparent)] hover:brightness-110 hover:shadow-[0_10px_36px_-6px_color-mix(in_oklab,var(--accent-warm-bright)_30%,transparent)] sm:inline-flex sm:w-auto sm:justify-start"
+                    >
+                      Email
+                    </a>
+                  </li>
+                  <li className="w-full sm:w-auto">
+                    <a
+                      href={person.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2.5 rounded-full border-2 border-[color-mix(in_oklab,var(--accent)_45%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-bright)_30%,transparent)] hover:text-[var(--accent)] sm:inline-flex sm:w-auto sm:justify-start"
+                    >
+                      GitHub
+                      <i className="fab fa-github link-icon-shift text-[1.05rem] opacity-90" aria-hidden />
+                    </a>
+                  </li>
+                  <li className="w-full sm:w-auto">
+                    <a
+                      href={person.links.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2.5 rounded-full border-2 border-[color-mix(in_oklab,var(--accent-warm)_40%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-warm-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-warm-bright)_28%,transparent)] hover:text-[var(--accent-warm-bright)] sm:inline-flex sm:w-auto sm:justify-start"
+                    >
+                      LinkedIn
+                      <i className="fab fa-linkedin-in link-icon-shift text-[1.05rem] opacity-90" aria-hidden />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 

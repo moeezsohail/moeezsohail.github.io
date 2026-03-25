@@ -24,8 +24,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f2f0" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f0e0d" },
+    { media: "(prefers-color-scheme: light)", color: "#eef2f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0f18" },
   ],
 };
 
@@ -54,6 +54,14 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </head>
       <body className="relative min-h-full font-sans">
         <AmbientBackground />
         <div className="relative z-10 flex min-h-full flex-col">{children}</div>
