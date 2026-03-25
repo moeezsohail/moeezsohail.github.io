@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #eef2f7;
@@ -16,7 +16,11 @@
   --accent-glow: color-mix(in oklab, var(--accent-bright) 45%, transparent);
   --warm-glow: color-mix(in oklab, var(--accent-warm-bright) 32%, transparent);
   --hero-mesh-1: color-mix(in oklab, var(--accent-bright) 20%, transparent);
-  --hero-mesh-2: color-mix(in oklab, var(--accent-warm-bright) 16%, transparent);
+  --hero-mesh-2: color-mix(
+    in oklab,
+    var(--accent-warm-bright) 16%,
+    transparent
+  );
   --gradient-text: linear-gradient(
     105deg,
     var(--accent) 0%,
@@ -28,12 +32,20 @@
     var(--accent) 0%,
     color-mix(in oklab, var(--accent-warm) 55%, var(--accent)) 100%
   );
-  --gradient-border: linear-gradient(135deg, var(--accent-bright), var(--accent-warm-bright));
+  --gradient-border: linear-gradient(
+    135deg,
+    var(--accent-bright),
+    var(--accent-warm-bright)
+  );
   --tag-bg: color-mix(in oklab, var(--accent) 14%, var(--surface));
   --tag-text: color-mix(in oklab, var(--accent) 72%, var(--foreground));
   /* Stronger blue mix so pills read clearly on light surfaces (vs teal pills) */
   --tag-bg-warm: color-mix(in oklab, var(--accent-warm) 16%, var(--surface));
-  --tag-text-warm: color-mix(in oklab, var(--accent-warm) 78%, var(--foreground));
+  --tag-text-warm: color-mix(
+    in oklab,
+    var(--accent-warm) 78%,
+    var(--foreground)
+  );
   --logo-gradient: linear-gradient(
     90deg,
     var(--accent) 0%,
@@ -56,23 +68,48 @@
     --accent-warm-bright: #60a5fa;
     --accent-on-solid: #0a0f18;
     --accent-glow: color-mix(in oklab, var(--accent-bright) 26%, transparent);
-    --warm-glow: color-mix(in oklab, var(--accent-warm-bright) 20%, transparent);
+    --warm-glow: color-mix(
+      in oklab,
+      var(--accent-warm-bright) 20%,
+      transparent
+    );
     --hero-mesh-1: color-mix(in oklab, var(--accent-bright) 16%, transparent);
-    --hero-mesh-2: color-mix(in oklab, var(--accent-warm-bright) 12%, transparent);
+    --hero-mesh-2: color-mix(
+      in oklab,
+      var(--accent-warm-bright) 12%,
+      transparent
+    );
     --gradient-text: linear-gradient(
       105deg,
       var(--accent-bright) 0%,
       var(--accent) 40%,
       var(--accent-warm-bright) 92%
     );
-    --gradient-cta: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent-warm) 100%);
-    --gradient-border: linear-gradient(135deg, var(--accent-bright), var(--accent-warm-bright));
+    --gradient-cta: linear-gradient(
+      135deg,
+      var(--accent-bright) 0%,
+      var(--accent-warm) 100%
+    );
+    --gradient-border: linear-gradient(
+      135deg,
+      var(--accent-bright),
+      var(--accent-warm-bright)
+    );
     --tag-bg: color-mix(in oklab, var(--accent) 16%, var(--surface));
     --tag-text: color-mix(in oklab, var(--accent-bright) 35%, white);
     /* Was ~14% blue on navy: same as card → invisible pills; bump contrast */
-    --tag-bg-warm: color-mix(in oklab, var(--accent-warm-bright) 34%, var(--surface));
+    --tag-bg-warm: color-mix(
+      in oklab,
+      var(--accent-warm-bright) 34%,
+      var(--surface)
+    );
     --tag-text-warm: color-mix(in oklab, var(--accent-warm-bright) 72%, white);
-    --logo-gradient: linear-gradient(90deg, #99f6e4 0%, #5eead4 40%, #93c5fd 100%);
+    --logo-gradient: linear-gradient(
+      90deg,
+      #99f6e4 0%,
+      #5eead4 40%,
+      #93c5fd 100%
+    );
   }
 }
 
@@ -84,7 +121,9 @@
 }
 
 .font-display {
-  font-family: var(--font-syne), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family:
+    var(--font-syne), var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
 }
 
 .text-gradient {
@@ -117,7 +156,9 @@
   align-items: center;
   gap: 0.75rem;
   row-gap: 0.35rem;
-  font-family: var(--font-syne), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family:
+    var(--font-syne), var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -125,7 +166,7 @@
 }
 
 .section-label::before {
-  content: "";
+  content: '';
   display: block;
   width: 2rem;
   height: 3px;
@@ -150,7 +191,11 @@ body {
   color: var(--foreground);
   min-height: 100%;
   min-height: 100dvh;
-  -webkit-tap-highlight-color: color-mix(in oklab, var(--accent) 25%, transparent);
+  -webkit-tap-highlight-color: color-mix(
+    in oklab,
+    var(--accent) 25%,
+    transparent
+  );
 }
 
 a,
@@ -177,8 +222,12 @@ button {
 }
 
 .logo-link:hover {
-  filter: drop-shadow(0 0 10px color-mix(in oklab, var(--accent-bright) 45%, transparent))
-    drop-shadow(0 0 20px color-mix(in oklab, var(--accent-warm-bright) 18%, transparent));
+  filter: drop-shadow(
+      0 0 10px color-mix(in oklab, var(--accent-bright) 45%, transparent)
+    )
+    drop-shadow(
+      0 0 20px color-mix(in oklab, var(--accent-warm-bright) 18%, transparent)
+    );
 }
 
 .logo-link:focus-visible {
@@ -195,7 +244,7 @@ button {
 }
 
 .nav-link-animated::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0.65rem;
   right: 0.65rem;
@@ -253,7 +302,8 @@ button {
 
 .card-tilt:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px -18px color-mix(in oklab, var(--accent) 22%, transparent);
+  box-shadow: 0 16px 40px -18px
+    color-mix(in oklab, var(--accent) 22%, transparent);
 }
 
 .link-icon-shift {

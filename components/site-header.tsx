@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
-import { navIds, person } from "@/lib/content";
+import { useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
+import { navIds, person } from '@/lib/content';
 
 /**
  * iOS (all browsers use WebKit): scrollIntoView({ behavior: "smooth" }) often no-ops;
@@ -13,24 +13,24 @@ function scrollToHashSection(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
 
-  const marginTop = parseFloat(getComputedStyle(el).scrollMarginTop || "0");
+  const marginTop = parseFloat(getComputedStyle(el).scrollMarginTop || '0');
   const y = el.getBoundingClientRect().top + window.scrollY - marginTop;
 
   const reduced =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // iOS WebKit (Safari + Chrome on iPhone; iPadOS may report as Mac): instant scroll is reliable.
   const isIOS =
-    typeof navigator !== "undefined" &&
+    typeof navigator !== 'undefined' &&
     (/iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1));
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
   const instant = reduced || isIOS;
 
   window.scrollTo({
     top: Math.max(0, y),
     left: 0,
-    behavior: instant ? "instant" : "auto",
+    behavior: instant ? 'instant' : 'auto'
   });
 }
 
@@ -40,27 +40,28 @@ export function SiteHeader() {
   const [backdropArmed, setBackdropArmed] = useState(false);
 
   useEffect(() => {
-    if (!open) {
-      setBackdropArmed(false);
-      return;
-    }
+    if (!open) return;
     const t = window.setTimeout(() => setBackdropArmed(true), 100);
-    return () => window.clearTimeout(t);
+    return () => {
+      window.clearTimeout(t);
+      setBackdropArmed(false);
+    };
   }, [open]);
 
-  const onMobileNavClick = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
+  const onMobileNavClick =
+    (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
 
-    flushSync(() => {
-      setOpen(false);
-    });
+      flushSync(() => {
+        setOpen(false);
+      });
 
-    window.history.replaceState(null, "", `#${id}`);
+      window.history.replaceState(null, '', `#${id}`);
 
-    const run = () => scrollToHashSection(id);
-    requestAnimationFrame(run);
-    window.setTimeout(run, 160);
-  };
+      const run = () => scrollToHashSection(id);
+      requestAnimationFrame(run);
+      window.setTimeout(run, 160);
+    };
 
   return (
     <header className="sticky top-0 z-50 w-full shrink-0 overflow-visible border-b border-[color-mix(in_oklab,var(--accent)_12%,var(--border))] bg-[color-mix(in_oklab,var(--surface)_85%,transparent)] pt-[env(safe-area-inset-top)] backdrop-blur-md">
@@ -80,7 +81,7 @@ export function SiteHeader() {
           className="logo-link flex min-h-11 min-w-[2.75rem] items-center font-display text-sm font-bold tracking-tight"
           onClick={() => setOpen(false)}
         >
-          <span className="text-logo-mark">{person.name.split(" ")[0]}</span>
+          <span className="text-logo-mark">{person.name.split(' ')[0]}</span>
           <span className="text-[var(--foreground)]">.</span>
         </a>
         <nav className="hidden items-center gap-1 sm:flex" aria-label="Primary">
@@ -100,7 +101,7 @@ export function SiteHeader() {
             className="relative z-[60] inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-[color-mix(in_oklab,var(--accent)_20%,var(--border))] bg-[var(--elevated)] text-[var(--foreground)] transition-[transform,box-shadow,border-color] duration-200 hover:scale-105 hover:border-[color-mix(in_oklab,var(--accent-bright)_35%,var(--border))] hover:shadow-[0_0_20px_-4px_color-mix(in_oklab,var(--accent-bright)_35%,transparent)] active:scale-100"
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={(e) => {
               e.stopPropagation();
               setOpen((v) => !v);
@@ -108,11 +109,27 @@ export function SiteHeader() {
           >
             <span className="sr-only">Menu</span>
             {open ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden
+              >
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden
+              >
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}

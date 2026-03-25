@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/site-header";
+import { SiteHeader } from '@/components/site-header';
 import {
   about,
   education,
@@ -6,9 +6,9 @@ import {
   navIds,
   person,
   projects,
-  skills,
-} from "@/lib/content";
-import Image from "next/image";
+  skills
+} from '@/lib/content';
+import Image from 'next/image';
 
 function ExternalIcon({ className }: { className?: string }) {
   return (
@@ -27,7 +27,13 @@ function ExternalIcon({ className }: { className?: string }) {
   );
 }
 
-function SectionTitle({ id, children }: { id?: string; children: React.ReactNode }) {
+function SectionTitle({
+  id,
+  children
+}: {
+  id?: string;
+  children: React.ReactNode;
+}) {
   return (
     <h2 id={id} className="section-label">
       <span className="text-gradient">{children}</span>
@@ -37,10 +43,10 @@ function SectionTitle({ id, children }: { id?: string; children: React.ReactNode
 
 function visitLinkLabel(href: string) {
   try {
-    const host = new URL(href).hostname.replace(/^www\./, "");
+    const host = new URL(href).hostname.replace(/^www\./, '');
     return `Visit ${host}`;
   } catch {
-    return "Visit site";
+    return 'Visit site';
   }
 }
 
@@ -92,7 +98,10 @@ export function HomePage() {
                       className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2.5 rounded-full border-2 border-[color-mix(in_oklab,var(--accent)_45%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-bright)_30%,transparent)] hover:text-[var(--accent)] sm:inline-flex sm:w-auto sm:justify-start"
                     >
                       GitHub
-                      <i className="fab fa-github link-icon-shift text-[1.05rem] opacity-90" aria-hidden />
+                      <i
+                        className="fab fa-github link-icon-shift text-[1.05rem] opacity-90"
+                        aria-hidden
+                      />
                     </a>
                   </li>
                   <li className="w-full sm:w-auto">
@@ -103,7 +112,10 @@ export function HomePage() {
                       className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2.5 rounded-full border-2 border-[color-mix(in_oklab,var(--accent-warm)_40%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-warm-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-warm-bright)_28%,transparent)] hover:text-[var(--accent-warm-bright)] sm:inline-flex sm:w-auto sm:justify-start"
                     >
                       LinkedIn
-                      <i className="fab fa-linkedin-in link-icon-shift text-[1.05rem] opacity-90" aria-hidden />
+                      <i
+                        className="fab fa-linkedin-in link-icon-shift text-[1.05rem] opacity-90"
+                        aria-hidden
+                      />
                     </a>
                   </li>
                 </ul>
@@ -144,9 +156,13 @@ export function HomePage() {
                         {job.company}
                       </p>
                     </div>
-                    <p className="text-sm tabular-nums text-[var(--muted)]">{job.range}</p>
+                    <p className="text-sm tabular-nums text-[var(--muted)]">
+                      {job.range}
+                    </p>
                   </div>
-                  <p className="mt-1 text-sm text-[var(--muted)]">{job.location}</p>
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    {job.location}
+                  </p>
                   <div className="relative mt-4 pl-5">
                     <div
                       className="absolute bottom-1 left-0 top-1 w-1 rounded-full bg-gradient-to-b from-[var(--accent-bright)] to-[var(--accent-warm-bright)]"
@@ -154,7 +170,10 @@ export function HomePage() {
                     />
                     <ul className="list-none space-y-2.5">
                       {job.highlights.map((h, i) => (
-                        <li key={i} className="text-sm leading-relaxed text-[var(--foreground)]/85">
+                        <li
+                          key={i}
+                          className="text-sm leading-relaxed text-[var(--foreground)]/85"
+                        >
                           {h}
                         </li>
                       ))}
@@ -177,15 +196,15 @@ export function HomePage() {
                   <div
                     className={
                       proj.featured
-                        ? "card-tilt border-gradient-wrap shadow-[0_12px_40px_-12px_color-mix(in_oklab,var(--accent)_25%,transparent)]"
-                        : ""
+                        ? 'card-tilt border-gradient-wrap shadow-[0_12px_40px_-12px_color-mix(in_oklab,var(--accent)_25%,transparent)]'
+                        : ''
                     }
                   >
                     <article
                       className={`h-full rounded-[0.875rem] p-5 sm:p-6 ${
                         proj.featured
-                          ? "bg-[var(--elevated)]"
-                          : "rounded-2xl border border-[var(--border)] bg-[var(--elevated)]"
+                          ? 'bg-[var(--elevated)]'
+                          : 'rounded-2xl border border-[var(--border)] bg-[var(--elevated)]'
                       }`}
                     >
                       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-2">
@@ -218,7 +237,10 @@ export function HomePage() {
                           ))}
                         </ul>
                       ) : null}
-                      <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies">
+                      <ul
+                        className="mt-5 flex flex-wrap gap-2"
+                        aria-label="Technologies"
+                      >
                         {proj.tags.map((t, i) => {
                           const warm = i % 2 === 1;
                           return (
@@ -226,8 +248,12 @@ export function HomePage() {
                               key={t}
                               className="rounded-full px-3 py-1 text-xs font-semibold"
                               style={{
-                                background: warm ? "var(--tag-bg-warm)" : "var(--tag-bg)",
-                                color: warm ? "var(--tag-text-warm)" : "var(--tag-text)",
+                                background: warm
+                                  ? 'var(--tag-bg-warm)'
+                                  : 'var(--tag-bg)',
+                                color: warm
+                                  ? 'var(--tag-text-warm)'
+                                  : 'var(--tag-text)'
                               }}
                             >
                               {t}
@@ -264,8 +290,12 @@ export function HomePage() {
                 <h3 className="font-display text-base font-bold text-[var(--foreground)]">
                   {education.school}
                 </h3>
-                <p className="mt-1 text-sm text-[var(--muted)]">{education.degree}</p>
-                <p className="mt-1 text-sm tabular-nums text-[var(--muted)]">{education.years}</p>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  {education.degree}
+                </p>
+                <p className="mt-1 text-sm tabular-nums text-[var(--muted)]">
+                  {education.years}
+                </p>
                 <p className="mt-2 text-sm font-medium text-[color-mix(in_oklab,var(--accent)_15%,var(--foreground))]">
                   {education.detail}
                 </p>
@@ -274,10 +304,10 @@ export function HomePage() {
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               {(
                 [
-                  ["Languages", skills.languages],
-                  ["Frameworks", skills.frameworks],
-                  ["Cloud & distributed", skills.cloud],
-                  ["Data & messaging", skills.data],
+                  ['Languages', skills.languages],
+                  ['Frameworks', skills.frameworks],
+                  ['Cloud & distributed', skills.cloud],
+                  ['Data & messaging', skills.data]
                 ] as const
               ).map(([label, items]) => (
                 <div
@@ -288,7 +318,7 @@ export function HomePage() {
                     {label}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-[var(--foreground)]/90">
-                    {items.join(" · ")}
+                    {items.join(' · ')}
                   </p>
                 </div>
               ))}
@@ -299,11 +329,13 @@ export function HomePage() {
         <footer className="border-t border-[color-mix(in_oklab,var(--accent)_15%,var(--border))] bg-[color-mix(in_oklab,var(--background)_82%,var(--surface))] backdrop-blur-sm">
           <div className="mx-auto max-w-3xl px-4 py-10 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-10 sm:px-6 sm:pb-10">
             <p className="text-balance text-center text-sm text-[var(--muted)]">
-              © {new Date().getFullYear()}{" "}
-              <span className="font-medium text-[var(--foreground)]">{person.name}</span>
+              © {new Date().getFullYear()}{' '}
+              <span className="font-medium text-[var(--foreground)]">
+                {person.name}
+              </span>
               <span className="mx-2 text-[var(--border)]">·</span>
               <a
-                href={`tel:+1${person.phone.replace(/\D/g, "")}`}
+                href={`tel:+1${person.phone.replace(/\D/g, '')}`}
                 className="rounded px-1 font-medium text-[var(--accent)] underline decoration-transparent underline-offset-4 transition-[color,decoration-color,transform] duration-200 hover:text-[var(--accent-warm)] hover:decoration-[var(--accent-warm-bright)] motion-safe:hover:-translate-y-px"
               >
                 {person.phone}
