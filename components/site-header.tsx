@@ -1,17 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import { navIds, person } from "@/lib/content";
 
-function scrollToSection(id: string) {
+/**
+ * iOS (all browsers use WebKit): scrollIntoView({ behavior: "smooth" }) often no-ops;
+ * rAF runs before the menu DOM is gone. Use sync state flush + delayed manual scrollTo
+ * so layout matches the collapsed header and scroll-margin-top is honored.
+ */
+function scrollToHashSection(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  const prefersReduced =
+
+  const marginTop = parseFloat(getComputedStyle(el).scrollMarginTop || "0");
+  const y = el.getBoundingClientRect().top + window.scrollY - marginTop;
+
+  const reduced =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  el.scrollIntoView({
-    block: "start",
-    behavior: prefersReduced ? "instant" : "smooth",
+
+  // iOS WebKit (Safari + Chrome on iPhone; iPadOS may report as Mac): instant scroll is reliable.
+  const isIOS =
+    typeof navigator !== "undefined" &&
+    (/iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1));
+  const instant = reduced || isIOS;
+
+  window.scrollTo({
+    top: Math.max(0, y),
+    left: 0,
+    behavior: instant ? "instant" : "auto",
   });
 }
 
@@ -31,14 +50,16 @@ export function SiteHeader() {
 
   const onMobileNavClick = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    setOpen(false);
-    window.history.replaceState(null, "", `#${id}`);
-    // After drawer unmounts, sticky height changes — wait for layout then scroll.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        scrollToSection(id);
-      });
+
+    flushSync(() => {
+      setOpen(false);
     });
+
+    window.history.replaceState(null, "", `#${id}`);
+
+    const run = () => scrollToHashSection(id);
+    requestAnimationFrame(run);
+    window.setTimeout(run, 160);
   };
 
   return (
@@ -111,7 +132,7 @@ export function SiteHeader() {
               <a
                 key={id}
                 href={`#${id}`}
-                className="rounded-lg px-3 py-3.5 text-base text-[var(--foreground)] transition-[transform,background-color] duration-200 active:bg-[color-mix(in_oklab,var(--accent)_10%,var(--elevated))] motion-safe:hover:translate-x-1 motion-safe:hover:bg-[color-mix(in_oklab,var(--accent)_8%,var(--elevated))]"
+                className="cursor-pointer rounded-lg px-3 py-3.5 text-base text-[var(--foreground)] transition-[transform,background-color] duration-200 active:bg-[color-mix(in_oklab,var(--accent)_10%,var(--elevated))] motion-safe:hover:translate-x-1 motion-safe:hover:bg-[color-mix(in_oklab,var(--accent)_8%,var(--elevated))]"
                 onClick={onMobileNavClick(id)}
               >
                 {label}
