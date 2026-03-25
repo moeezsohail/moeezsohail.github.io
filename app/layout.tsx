@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { AmbientBackground } from "@/components/ambient-background";
 import { Geist, Geist_Mono, Syne } from "next/font/google";
 import "./globals.css";
@@ -18,6 +18,16 @@ const syne = Syne({
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f2f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0e0d" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "Moeez Sohail — Software Engineer",

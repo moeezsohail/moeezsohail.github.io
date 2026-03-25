@@ -4,7 +4,7 @@ export const person = {
   tagline: "Backend & distributed systems at production scale.",
   email: "moeezsohail11@gmail.com",
   phone: "571-208-5622",
-  location: "Washington DC–Baltimore area",
+  location: "Washington DC / Northern Virginia",
   links: {
     linkedin: "https://www.linkedin.com/in/moeezsohail",
     github: "https://github.com/moeezsohail",

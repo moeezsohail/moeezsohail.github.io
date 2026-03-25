@@ -47,47 +47,47 @@ export function HomePage() {
   return (
     <>
       <SiteHeader />
-      <main id="top" className="flex-1">
+      <main id="top" className="min-w-0 flex-1 overflow-x-clip">
         <section className="relative">
-          <div className="relative mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-28">
+          <div className="relative mx-auto max-w-3xl py-16 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:py-28 sm:pl-6 sm:pr-6">
             <p className="mb-3 text-sm font-semibold tracking-wide text-[var(--accent-warm)]">
               {person.title}
             </p>
-            <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl sm:leading-[1.08]">
+            <h1 className="font-display text-[clamp(1.875rem,6.5vw+0.5rem,3.15rem)] font-bold leading-[1.12] tracking-tight sm:text-5xl sm:leading-[1.08]">
               <span className="text-gradient">{person.name}</span>
             </h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
               {person.tagline}
             </p>
             <p className="mt-2 text-sm text-[color-mix(in_oklab,var(--accent)_25%,var(--muted))]">
               {person.location}
             </p>
-            <ul className="mt-8 flex flex-wrap gap-2">
-              <li>
+            <ul className="mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap">
+              <li className="w-full sm:w-auto">
                 <a
                   href={`mailto:${person.email}`}
-                  className="btn-lift inline-flex items-center gap-2 rounded-full bg-gradient-cta px-5 py-2.5 text-sm font-semibold text-[var(--accent-on-solid)] shadow-[0_4px_20px_color-mix(in_oklab,var(--accent)_35%,transparent)] hover:brightness-110 hover:shadow-[0_10px_36px_-6px_color-mix(in_oklab,var(--accent-warm)_35%,transparent)]"
+                  className="btn-lift flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-cta px-5 py-2.5 text-sm font-semibold text-[var(--accent-on-solid)] shadow-[0_4px_20px_color-mix(in_oklab,var(--accent)_35%,transparent)] hover:brightness-110 hover:shadow-[0_10px_36px_-6px_color-mix(in_oklab,var(--accent-warm)_35%,transparent)] sm:inline-flex sm:w-auto sm:justify-start"
                 >
                   Email
                 </a>
               </li>
-              <li>
+              <li className="w-full sm:w-auto">
                 <a
                   href={person.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group btn-lift inline-flex items-center gap-2 rounded-full border-2 border-[color-mix(in_oklab,var(--accent)_45%,var(--border))] bg-[var(--surface)] px-4 py-2 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-bright)_30%,transparent)] hover:text-[var(--accent)]"
+                  className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-2 border-[color-mix(in_oklab,var(--accent)_45%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-bright)_30%,transparent)] hover:text-[var(--accent)] sm:inline-flex sm:w-auto sm:justify-start"
                 >
                   GitHub
                   <ExternalIcon className="link-icon-shift opacity-70" />
                 </a>
               </li>
-              <li>
+              <li className="w-full sm:w-auto">
                 <a
                   href={person.links.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group btn-lift inline-flex items-center gap-2 rounded-full border-2 border-[color-mix(in_oklab,var(--accent-warm)_40%,var(--border))] bg-[var(--surface)] px-4 py-2 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-warm-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-warm-bright)_28%,transparent)] hover:text-[var(--accent-warm)]"
+                  className="group btn-lift flex min-h-11 w-full items-center justify-center gap-2 rounded-full border-2 border-[color-mix(in_oklab,var(--accent-warm)_40%,var(--border))] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] hover:border-[var(--accent-warm-bright)] hover:shadow-[0_8px_28px_-10px_color-mix(in_oklab,var(--accent-warm-bright)_28%,transparent)] hover:text-[var(--accent-warm)] sm:inline-flex sm:w-auto sm:justify-start"
                 >
                   LinkedIn
                   <ExternalIcon className="link-icon-shift opacity-70" />
@@ -97,17 +97,25 @@ export function HomePage() {
           </div>
         </section>
 
-        <div className="mx-auto max-w-3xl space-y-20 px-4 py-16 sm:px-6 sm:py-24">
-          <section id={navIds[0].id} aria-labelledby="about-heading" className="scroll-mt-20">
+        <div className="mx-auto max-w-3xl space-y-16 py-12 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:space-y-20 sm:py-24 sm:pl-6 sm:pr-6">
+          <section
+            id={navIds[0].id}
+            aria-labelledby="about-heading"
+            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+          >
             <SectionTitle id="about-heading">About</SectionTitle>
-            <div className="mt-6 space-y-4 text-[var(--foreground)]/90 leading-relaxed">
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--foreground)]/90">
               {about.paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
           </section>
 
-          <section id={navIds[1].id} aria-labelledby="exp-heading" className="scroll-mt-20">
+          <section
+            id={navIds[1].id}
+            aria-labelledby="exp-heading"
+            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+          >
             <SectionTitle id="exp-heading">Experience</SectionTitle>
             <ul className="mt-8 space-y-10">
               {experience.map((job) => (
@@ -142,7 +150,11 @@ export function HomePage() {
             </ul>
           </section>
 
-          <section id={navIds[2].id} aria-labelledby="proj-heading" className="scroll-mt-20">
+          <section
+            id={navIds[2].id}
+            aria-labelledby="proj-heading"
+            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+          >
             <SectionTitle id="proj-heading">Projects</SectionTitle>
             <ul className="mt-8 grid gap-5">
               {projects.map((proj) => (
@@ -161,12 +173,12 @@ export function HomePage() {
                           : "rounded-2xl border border-[var(--border)] bg-[var(--elevated)]"
                       }`}
                     >
-                      <div className="flex flex-wrap items-start justify-between gap-2">
-                        <h3 className="font-display text-xl font-bold text-[var(--foreground)]">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-2">
+                        <h3 className="font-display text-lg font-bold text-[var(--foreground)] sm:text-xl">
                           {proj.title}
                         </h3>
                         {proj.period ? (
-                          <span className="rounded-full bg-[var(--tag-bg-warm)] px-3 py-1 text-xs font-semibold tabular-nums text-[var(--tag-text-warm)]">
+                          <span className="w-fit shrink-0 rounded-full bg-[var(--tag-bg-warm)] px-3 py-1.5 text-xs font-semibold tabular-nums text-[var(--tag-text-warm)] sm:py-1">
                             {proj.period}
                           </span>
                         ) : null}
@@ -176,7 +188,7 @@ export function HomePage() {
                           Featured build
                         </p>
                       ) : null}
-                      <p className="mt-4 text-sm leading-relaxed text-[var(--foreground)]/90">
+                      <p className="mt-4 text-base leading-relaxed text-[var(--foreground)]/90 sm:text-sm">
                         {proj.description}
                       </p>
                       {proj.highlights?.length ? (
@@ -213,7 +225,7 @@ export function HomePage() {
                           href={proj.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent)] underline decoration-[color-mix(in_oklab,var(--accent)_40%,transparent)] decoration-2 underline-offset-[0.35em] transition-[color,decoration-color] duration-200 hover:text-[var(--accent-warm)] hover:decoration-[var(--accent-warm-bright)]"
+                          className="group mt-5 inline-flex min-h-11 max-w-full items-center gap-1.5 break-words text-sm font-bold text-[var(--accent)] underline decoration-[color-mix(in_oklab,var(--accent)_40%,transparent)] decoration-2 underline-offset-[0.35em] transition-[color,decoration-color] duration-200 hover:text-[var(--accent-warm)] hover:decoration-[var(--accent-warm-bright)]"
                         >
                           {visitLinkLabel(proj.href)}
                           <ExternalIcon className="link-icon-shift" />
@@ -226,7 +238,11 @@ export function HomePage() {
             </ul>
           </section>
 
-          <section id={navIds[3].id} aria-labelledby="edu-heading" className="scroll-mt-20">
+          <section
+            id={navIds[3].id}
+            aria-labelledby="edu-heading"
+            className="scroll-mt-[max(6.5rem,calc(3.5rem+env(safe-area-inset-top)+1.25rem))] sm:scroll-mt-24"
+          >
             <SectionTitle id="edu-heading">Education & skills</SectionTitle>
             <div className="border-gradient-wrap mt-8">
               <div className="rounded-[0.875rem] bg-[var(--elevated)] p-5 sm:p-6">
@@ -266,8 +282,8 @@ export function HomePage() {
         </div>
 
         <footer className="border-t border-[color-mix(in_oklab,var(--accent)_15%,var(--border))] bg-[color-mix(in_oklab,var(--background)_82%,var(--surface))] backdrop-blur-sm">
-          <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-            <p className="text-center text-sm text-[var(--muted)]">
+          <div className="mx-auto max-w-3xl px-4 py-10 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-10 sm:px-6 sm:pb-10">
+            <p className="text-balance text-center text-sm text-[var(--muted)]">
               © {new Date().getFullYear()}{" "}
               <span className="font-medium text-[var(--foreground)]">{person.name}</span>
               <span className="mx-2 text-[var(--border)]">·</span>
