@@ -1,7 +1,8 @@
 export const person = {
   name: 'Moeez Sohail',
   title: 'Software Engineer',
-  tagline: 'Backend & distributed systems at production scale.',
+  tagline:
+    'I build production web platforms with strong backend architecture and clean product UX.',
   email: 'moeezsohail11@gmail.com',
   phone: '571-208-5622',
   location: 'Washington DC / Northern Virginia',
@@ -14,9 +15,8 @@ export const person = {
 
 export const about = {
   paragraphs: [
-    "I'm a software engineer at Cvent, working on high-impact booking and checkout systems in a distributed, microservices-based architecture.",
-    'I build backend services with Java (Dropwizard) and AWS—systems that power large-scale integrations and handle thousands of requests daily. My work spans core transaction flows, reliability, and modernizing legacy infrastructure through migrations to REST-based services. I also contribute across the stack with React and GraphQL when the problem calls for it.',
-    "I've taken on increasing ownership: leading feature development, improving architecture, and supporting quality through code reviews and mentorship. I'm especially interested in backend and distributed systems that stay reliable at real-world production scale."
+    'Software engineer at Cvent building booking and checkout systems in distributed microservice environments.',
+    'I specialize in production-ready backend systems (Java, AWS, PostgreSQL, GraphQL) and ship polished full-stack products with clear business outcomes.'
   ]
 };
 
@@ -25,6 +25,7 @@ export type ExperienceItem = {
   location: string;
   role: string;
   range: string;
+  summary?: string;
   highlights: string[];
 };
 
@@ -34,11 +35,12 @@ export const experience: ExperienceItem[] = [
     location: 'McLean, VA',
     role: 'Software Engineer II',
     range: 'Mar 2025 – Present',
+    summary:
+      'Own core booking and checkout reliability across distributed Java services.',
     highlights: [
-      'Led development of core booking and checkout systems, ensuring reliable end-to-end transaction flows in a microservices architecture (Java, Dropwizard, AWS).',
-      'Built and scaled features for international users, enabling global booking workflows across distributed systems.',
-      'Drove migration from legacy SOAP services to REST APIs, enabling scalable integrations handling thousands of requests daily.',
-      'Technical leadership through design ownership, code reviews, and mentorship—promoting strong engineering practices across the team.'
+      'Led end-to-end delivery of booking and checkout features in a Java/Dropwizard microservice stack on AWS, improving transaction reliability.',
+      'Drove SOAP-to-REST modernization for partner integrations, enabling scalable request handling at thousands-of-requests-per-day volume.',
+      'Provided technical leadership through design ownership, code reviews, and mentoring to raise delivery quality across the team.'
     ]
   },
   {
@@ -46,11 +48,12 @@ export const experience: ExperienceItem[] = [
     location: 'McLean, VA',
     role: 'Software Engineer I',
     range: 'Jun 2023 – Mar 2025',
+    summary:
+      'Built and scaled backend services for high-throughput booking workflows.',
     highlights: [
-      'Built and maintained backend services with Java (Dropwizard) for high-throughput booking and checkout workflows.',
-      'Developed microservices to aggregate and process booking data using AWS (ECS, Lambda, DynamoDB) for scalable, resilient systems.',
-      'Upgraded external APIs and improved service performance for more reliable distributed interactions.',
-      'Delivered features across a full-stack architecture (React, GraphQL) with solid testing and integration practices.'
+      'Implemented Java backend services for booking and checkout paths with strong uptime and production-readiness requirements.',
+      'Developed AWS-backed microservices (ECS, Lambda, DynamoDB) to aggregate and process booking data at scale.',
+      'Improved external API reliability and performance while contributing across the stack with React and GraphQL.'
     ]
   },
   {
@@ -58,10 +61,12 @@ export const experience: ExperienceItem[] = [
     location: 'McLean, VA',
     role: 'Software Engineering Intern',
     range: 'Jun 2022 – Aug 2022',
+    summary:
+      'Improved GraphQL performance and frontend delivery workflows.',
     highlights: [
-      'Refactored data access with Apollo data sources to improve GraphQL-to-REST performance through caching and faster operations.',
-      'Built React tooling (Context, React Testing Library) to help teams refactor and test a complex Instant Book UI.',
-      'Worked in a Kanban flow across frontend and backend; ran silo and integration testing before staging and production deploys.'
+      'Refactored Apollo data-source patterns to improve GraphQL-to-REST caching and request efficiency.',
+      'Built React tooling and test coverage to support refactors in a complex Instant Book UI.',
+      'Contributed across frontend and backend delivery with integration testing before staging and production release.'
     ]
   },
   {
@@ -69,9 +74,11 @@ export const experience: ExperienceItem[] = [
     location: 'Charlottesville, VA',
     role: 'Undergraduate Teaching Assistant',
     range: 'Sep 2020 – May 2023',
+    summary:
+      'Supported student outcomes in core CS coursework at scale.',
     highlights: [
-      'Software Development Methods (CS 2110) through Dec 2021; Data Structures & Algorithms I (CS 2100) from Jan 2022.',
-      'Held 5+ office hours per week; met weekly with student groups to reinforce core concepts and code.'
+      'Supported Software Development Methods and Data Structures courses with recurring office hours and mentoring.',
+      'Held 5+ office hours weekly and coached student groups on debugging, implementation, and algorithm fundamentals.'
     ]
   },
   {
@@ -79,10 +86,11 @@ export const experience: ExperienceItem[] = [
     location: 'Remote',
     role: 'Data Analyst Intern',
     range: 'Feb 2021 – Oct 2021',
+    summary:
+      'Analyzed social misinformation trends for healthcare research support.',
     highlights: [
       'Collected and structured COVID-19 misinformation data across social platforms for analysis with MITRE’s SQUINT team.',
-      'Collaborated on analyses that helped the medical community spot misinformation trends.',
-      'Compared vaccination rates with misinformation signals across states to study vaccine hesitancy patterns.'
+      'Built comparative analyses of misinformation signals and vaccination rates to support vaccine-hesitancy research.'
     ]
   }
 ];
@@ -90,11 +98,16 @@ export const experience: ExperienceItem[] = [
 export type ProjectItem = {
   title: string;
   period?: string;
+  category?: 'Commerce' | 'Collaboration' | 'Platform';
   description: string;
+  proof?: string;
   /** Short punchy bullets shown under the description */
   highlights?: string[];
   tags: string[];
+  coreStack?: string[];
+  opsQuality?: string[];
   href?: string;
+  codeHref?: string;
   featured?: boolean;
 };
 
@@ -102,16 +115,80 @@ export const projects: ProjectItem[] = [
   {
     title: 'Humza Prints',
     period: '2026 – Present',
+    category: 'Commerce',
     description:
-      'I designed and built humzaprints.com from first commit to live sales: a full storefront for custom framing and prints—not a portfolio demo, but real checkout, real payouts, and real customers walking through the door.',
+      'I designed and shipped humzaprints.com from first commit to live sales: a production storefront for custom framing and automotive fine-art prints with real checkout, fulfillment workflows, and repeat customers.',
+    proof:
+      'Production commerce stack with active customer usage, order lifecycle automation, and admin operations tooling.',
     highlights: [
-      'PostgreSQL + PostGraphile power the catalog and CMS-style pages so product stories and layouts can evolve without constant redeploys.',
-      'Stripe end-to-end for payments; order and fulfillment data stay tied to the same backend the storefront reads from.',
-      'Next.js on the front: fast, accessible pages with the kind of finish you expect from a consumer brand, not a weekend script.'
+      'Built a polished Next.js + TypeScript storefront across home, shop, product, cart, and post-purchase flows used by active customers.',
+      'PostgreSQL + GraphQL power both the product catalog and CMS-style page editing so content updates ship without redeploys.',
+      'Stripe Checkout + webhook orchestration run the purchase lifecycle end-to-end, including order confirmations and first-time discount handling.'
     ],
-    tags: ['Next.js', 'Stripe', 'PostgreSQL', 'PostGraphile', 'GraphQL'],
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'PostgreSQL',
+      'GraphQL',
+      'Stripe',
+      'Auth0',
+      'Resend',
+      'Playwright',
+      'Vercel'
+    ],
+    coreStack: [
+      'Next.js',
+      'TypeScript',
+      'PostgreSQL',
+      'GraphQL',
+      'Stripe'
+    ],
+    opsQuality: ['Auth0', 'Resend', 'Playwright', 'Vercel'],
     href: 'https://humzaprints.com',
     featured: true
+  },
+  {
+    title: 'TripSova',
+    period: '2026 – Present',
+    category: 'Collaboration',
+    description:
+      'I designed and shipped Tripsova as a production-ready collaborative travel planning app: a shared workspace where people organize trip ideas, upcoming plans, and completed journeys while coordinating with friends.',
+    proof:
+      'Live collaborative planning app with authenticated sharing, role-based access, and operational notification workflows.',
+    highlights: [
+      'Built a polished Next.js + TypeScript experience across landing, trip board, trip detail, sharing, and network flows so plans, links, and expenses live in one place.',
+      'Implemented PostgreSQL-backed trip, collaborator, invite, and feed models with secure API routes for create, edit, and share workflows plus granular access control.',
+      'Built AI-assisted planning using the Vercel AI SDK (ai, @ai-sdk/react) with streaming chat UX, guided trip starters, and structured suggestions for new and existing trip flows.'
+    ],
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'PostgreSQL',
+      'React',
+      'Vercel AI SDK',
+      'NextAuth',
+      'Resend',
+      'Cloudinary',
+      'Playwright',
+      'Jest',
+      'Vercel'
+    ],
+    coreStack: [
+      'Next.js',
+      'TypeScript',
+      'PostgreSQL',
+      'React',
+      'Vercel AI SDK'
+    ],
+    opsQuality: [
+      'NextAuth',
+      'Resend',
+      'Cloudinary',
+      'Playwright + Jest',
+      'Vercel'
+    ],
+    href: 'https://tripsova.vercel.app/',
+    featured: false
   }
 ];
 
@@ -119,26 +196,50 @@ export const education = {
   school: 'University of Virginia',
   degree: 'B.S. Computer Science',
   years: '2019 – 2023',
-  detail: 'GPA 3.8 • Highest Distinction'
+  detail: 'GPA 3.8 • Highest Distinction',
+  focus: 'Distributed systems, backend architecture, and full-stack product delivery.'
 };
 
 export const skills = {
-  languages: ['Java', 'TypeScript', 'JavaScript', 'Python', 'SQL'],
-  frameworks: [
-    'Dropwizard',
-    'Spring Boot',
-    'React',
-    'Next.js',
-    'Node.js',
-    'GraphQL'
+  roleTracks: ['Backend Engineer', 'Full-stack Engineer', 'Distributed Systems'],
+  groups: [
+    {
+      label: 'Backend & APIs',
+      level: 'Primary',
+      description: 'Production service design, integrations, and transaction workflows.',
+      items: ['Java', 'Dropwizard', 'Spring Boot', 'GraphQL', 'REST', 'Node.js']
+    },
+    {
+      label: 'Cloud & infrastructure',
+      level: 'Primary',
+      description: 'AWS-first deployment and event-driven architecture patterns.',
+      items: ['AWS ECS', 'AWS Lambda', 'EventBridge', 'Step Functions', 'Docker']
+    },
+    {
+      label: 'Frontend',
+      level: 'Working',
+      description: 'Product-focused UI implementation for end-to-end delivery.',
+      items: ['React', 'Next.js', 'TypeScript', 'JavaScript']
+    },
+    {
+      label: 'Data & messaging',
+      level: 'Primary',
+      description: 'Reliable data modeling, search, and async processing.',
+      items: ['PostgreSQL', 'MSSQL', 'OpenSearch', 'RabbitMQ', 'SQL']
+    },
+    {
+      label: 'Languages',
+      level: 'Primary',
+      description: 'Core languages used across backend and full-stack work.',
+      items: ['Java', 'TypeScript', 'JavaScript', 'Python', 'SQL']
+    }
   ],
-  cloud: ['AWS (Lambda, Step Functions, EventBridge, ECS)', 'Docker'],
-  data: ['PostgreSQL', 'MSSQL', 'OpenSearch', 'RabbitMQ']
+  alsoWorkedWith: ['Auth0', 'Stripe', 'Resend', 'Playwright']
 };
 
 export const navIds = [
   { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' }
 ] as const;

@@ -32,15 +32,27 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Moeez Sohail — Software Engineer',
   description:
-    'Software engineer at Cvent. Backend, distributed systems, Java, AWS, React, and GraphQL.',
+    'Software engineer at Cvent. I build production web apps, backend systems, and commerce workflows with Next.js, TypeScript, Java, and AWS.',
   metadataBase: new URL('https://moeezsohail.github.io'),
+  keywords: [
+    'Moeez Sohail',
+    'software engineer',
+    'full-stack engineer',
+    'backend engineer',
+    'Next.js',
+    'TypeScript',
+    'Java',
+    'AWS'
+  ],
   openGraph: {
-    title: 'Moeez Sohail',
-    description: 'Software engineer — booking systems, microservices, AWS.',
+    title: 'Moeez Sohail — Software Engineer',
+    description:
+      'Production-focused engineer building reliable backend systems and polished full-stack products.',
     url: 'https://moeezsohail.github.io',
     siteName: 'Moeez Sohail',
     locale: 'en_US',
-    type: 'website'
+    type: 'website',
+    images: ['/profile_pic.jpeg']
   }
 };
 

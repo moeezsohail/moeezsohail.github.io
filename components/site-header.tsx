@@ -36,6 +36,7 @@ function scrollToHashSection(id: string) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   /** Avoid same tap that opens the menu hitting the dimmer and closing instantly (iOS). */
   const [backdropArmed, setBackdropArmed] = useState(false);
 
@@ -47,6 +48,13 @@ export function SiteHeader() {
       setBackdropArmed(false);
     };
   }, [open]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const onMobileNavClick =
     (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -64,7 +72,13 @@ export function SiteHeader() {
     };
 
   return (
-    <header className="sticky top-0 z-50 w-full shrink-0 overflow-visible border-b border-[color-mix(in_oklab,var(--accent)_12%,var(--border))] bg-[color-mix(in_oklab,var(--surface)_85%,transparent)] pt-[env(safe-area-inset-top)] backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-50 w-full shrink-0 overflow-visible border-b pt-[env(safe-area-inset-top)] backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-200 ${
+        scrolled
+          ? 'border-[color-mix(in_oklab,var(--accent)_22%,var(--border))] bg-[color-mix(in_oklab,var(--surface)_94%,transparent)] shadow-[0_8px_28px_-18px_color-mix(in_oklab,var(--foreground)_50%,transparent)]'
+          : 'border-[color-mix(in_oklab,var(--accent)_12%,var(--border))] bg-[color-mix(in_oklab,var(--surface)_85%,transparent)]'
+      }`}
+    >
       {open && backdropArmed ? (
         <button
           type="button"
@@ -75,7 +89,7 @@ export function SiteHeader() {
         />
       ) : null}
 
-      <div className="relative z-50 mx-auto flex min-h-14 max-w-3xl items-center justify-between gap-3 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:min-h-14 sm:gap-4 sm:pl-6 sm:pr-6">
+      <div className="relative z-50 mx-auto flex min-h-14 w-full max-w-6xl items-center justify-between gap-3 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:min-h-14 sm:gap-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8">
         <a
           href="#top"
           className="logo-link flex min-h-11 min-w-[2.75rem] items-center font-display text-sm font-bold tracking-tight"
